@@ -21,7 +21,7 @@
 		ECC70CA61A649323007D6706 /* TigerPlayers.jpg in Resources */ = {isa = PBXBuildFile; fileRef = ECC70CA51A649323007D6706 /* TigerPlayers.jpg */; };
 		ECC70CA81A64932F007D6706 /* SeattleFromSky.jpg in Resources */ = {isa = PBXBuildFile; fileRef = ECC70CA71A64932F007D6706 /* SeattleFromSky.jpg */; };
 		ECC70CAA1A64933B007D6706 /* RoadNowhere.jpg in Resources */ = {isa = PBXBuildFile; fileRef = ECC70CA91A64933B007D6706 /* RoadNowhere.jpg */; };
-		ECFF7D7E1A64987E006A8E0B /* FuckinMerica.jpg in Resources */ = {isa = PBXBuildFile; fileRef = ECFF7D7D1A64987E006A8E0B /* FuckinMerica.jpg */; };
+		ECFF7D7E1A64987E006A8E0B /* MericaVette.jpg in Resources */ = {isa = PBXBuildFile; fileRef = ECFF7D7D1A64987E006A8E0B /* MericaVette.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,7 +53,7 @@
 		ECC70CA51A649323007D6706 /* TigerPlayers.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = TigerPlayers.jpg; sourceTree = "<group>"; };
 		ECC70CA71A64932F007D6706 /* SeattleFromSky.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = SeattleFromSky.jpg; sourceTree = "<group>"; };
 		ECC70CA91A64933B007D6706 /* RoadNowhere.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = RoadNowhere.jpg; sourceTree = "<group>"; };
-		ECFF7D7D1A64987E006A8E0B /* FuckinMerica.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = FuckinMerica.jpg; sourceTree = "<group>"; };
+		ECFF7D7D1A64987E006A8E0B /* MericaVette.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = MericaVette.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,7 +141,7 @@
 				ECC70CA51A649323007D6706 /* TigerPlayers.jpg */,
 				ECC70C9F1A649303007D6706 /* BaseballGrass.jpg */,
 				ECC70CA11A649311007D6706 /* FireImpreza.jpg */,
-				ECFF7D7D1A64987E006A8E0B /* FuckinMerica.jpg */,
+				ECFF7D7D1A64987E006A8E0B /* MericaVette.jpg */,
 				ECC70C991A647FEC007D6706 /* AustinJackson.png */,
 			);
 			name = Pictures;
@@ -230,7 +230,7 @@
 				ECA533CA1A646F8600E84D04 /* LaunchScreen.xib in Resources */,
 				ECC70CA61A649323007D6706 /* TigerPlayers.jpg in Resources */,
 				ECA533C71A646F8600E84D04 /* Images.xcassets in Resources */,
-				ECFF7D7E1A64987E006A8E0B /* FuckinMerica.jpg in Resources */,
+				ECFF7D7E1A64987E006A8E0B /* MericaVette.jpg in Resources */,
 				ECC70CA01A649303007D6706 /* BaseballGrass.jpg in Resources */,
 				ECC70CA41A64931B007D6706 /* RoadBackground.jpg in Resources */,
 				ECC70CA81A64932F007D6706 /* SeattleFromSky.jpg in Resources */,

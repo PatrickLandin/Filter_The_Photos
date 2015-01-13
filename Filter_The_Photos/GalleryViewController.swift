@@ -19,11 +19,10 @@ class GalleryViewController: UIViewController, UICollectionViewDataSource {
     self.collectionView = UICollectionView(frame: rootView.frame, collectionViewLayout: collectionViewFlowLayout)
     rootView.addSubview(self.collectionView)
     self.collectionView.dataSource = self
+    self.collectionView.setTranslatesAutoresizingMaskIntoConstraints(false)
     collectionViewFlowLayout.itemSize = CGSize(width: 200, height: 200)
     
-    let collectionView = UICollectionView
-    let views = ["collectionView" = collectionView]
-    
+    let views = ["collectionView" : self.collectionView]
     self.setupConstraintsOnRootView(rootView, forViews: views)
     self.view = rootView
   }
@@ -39,7 +38,7 @@ class GalleryViewController: UIViewController, UICollectionViewDataSource {
       let image4 = UIImage(named: "TigerPlayers.jpg")
       let image5 = UIImage(named: "BaseballGrass.jpg")
       let image6 = UIImage(named: "FireImpreza.jpg")
-      let image7 = UIImage(named: "FuckinMerica.jpg")
+      let image7 = UIImage(named: "MericaVette.jpg")
       let image8 = UIImage(named: "AustinJackson")
       self.images.append(image1!)
       self.images.append(image2!)
@@ -65,10 +64,10 @@ class GalleryViewController: UIViewController, UICollectionViewDataSource {
   
   func setupConstraintsOnRootView(rootView : UIView, forViews views: [String : AnyObject]) {
     
-    let collectionVuew = views["imageView"] as UIView!
-    let collectionViewConstraintVertical = NSLayoutConstraint.constraintsWithVisualFormat("V:|-80-[imageView]-20-[photoButton]", options: nil, metrics: nil, views: views)
+//    let collectionView = views["collectionView"] as UIView!
+    let collectionViewConstraintVertical = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[collectionView]-0-|", options: nil, metrics: nil, views: views)
     rootView.addConstraints(collectionViewConstraintVertical)
-    let collectionViewConstraintHorizontal = NSLayoutConstraint.constraintsWithVisualFormat("H:|-20-[imageView]-20-|", options: nil, metrics: nil, views: views)
+    let collectionViewConstraintHorizontal = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[collectionView]-0-|", options: nil, metrics: nil, views: views)
     rootView.addConstraints(collectionViewConstraintHorizontal)
     
   }
