@@ -27,6 +27,8 @@ class ViewController: UIViewController {
     let imageView = UIImageView(image: imageViewPic)
     imageView.setTranslatesAutoresizingMaskIntoConstraints(false)
     rootView.addSubview(imageView)
+    imageView.layer.masksToBounds = true
+    imageView.layer.cornerRadius = 10.0
     
     let views = ["photoButton" : photoButton, "imageView" : imageView]
     self.setupConstraintsOnRootView(rootView, forViews: views)
@@ -41,7 +43,12 @@ class ViewController: UIViewController {
       let galleryVC = GalleryViewController()
       self.navigationController?.pushViewController(galleryVC, animated: true )
     }
+    
+    let galleryCancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel) { (action) -> Void in
+    }
     self.alertController.addAction(galleryOption)
+    self.alertController.addAction(galleryCancel)
+    
     // Do any additional setup after loading the view, typically from a nib.
   }
   
