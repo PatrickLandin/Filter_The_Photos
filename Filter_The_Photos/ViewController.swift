@@ -12,6 +12,8 @@ class ViewController: UIViewController, imageSelectedProtocol, UICollectionViewD
   
   let alertController = UIAlertController(title: "Stuff", message: "More Stuff", preferredStyle: UIAlertControllerStyle.ActionSheet)
   let imageView = UIImageView()
+//  let imageViewPic = UIImage(named: "AustinJackson")
+//  let imageView = UIImageView(image: imageViewPic)
   var collectionView : UICollectionView!
   var collectionViewYConstraint : NSLayoutConstraint!
   var originalThumbnail : UIImage!
@@ -30,7 +32,7 @@ class ViewController: UIViewController, imageSelectedProtocol, UICollectionViewD
     let photoButton = UIButton()
     photoButton.setTranslatesAutoresizingMaskIntoConstraints(false)
     rootView.addSubview(photoButton)
-    photoButton.setTitle("Photo Button", forState: .Normal)
+    photoButton.setTitle("Photo Options", forState: .Normal)
     photoButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
     photoButton.addTarget(self, action: "photoButtonPressed:", forControlEvents: UIControlEvents.TouchUpInside)
     let collectionViewFlowLayout = UICollectionViewFlowLayout()
@@ -46,9 +48,21 @@ class ViewController: UIViewController, imageSelectedProtocol, UICollectionViewD
     self.setupConstraintsOnRootView(rootView, forViews: views)
     self.view = rootView
   }
+  
+  override func viewWillAppear(animated: Bool) {
+    super.viewWillAppear(animated)
+    
+    var doneButton = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: "doneButtonPressed") //Use a selector
+    navigationItem.rightBarButtonItem = doneButton
+    var saveButton = UIBarButtonItem(barButtonSystemItem: .Save, target: self, action: "saveButtonPressed")
+    navigationItem.leftBarButtonItem = saveButton
+//    navigationController!.navigationBar.barTintColor = UIColor.whiteColor()
+    title = "Filter"
+  }
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    self.navigationItem.title = "Filet the Photos"
     
     let galleryOption = UIAlertAction(title: "Gallery", style: UIAlertActionStyle.Default) { (action) -> Void in
       println("Gallery Pressed")
@@ -83,6 +97,18 @@ class ViewController: UIViewController, imageSelectedProtocol, UICollectionViewD
       let thumbnail = Thumbnail(filterName: name, operationQueue: self.imageQueue, context: self.gpuContext)
       self.thumbnails.append(thumbnail)
     }
+  }
+  
+  //MARK: Navigation button methods
+  func doneButtonPressed() {
+    self.collectionViewYConstraint.constant = (-200)
+    UIView.animateWithDuration(0.4, animations: { () -> Void in
+      self.view.setNeedsLayout()
+    })
+  }
+  
+  func saveButtonPressed() {
+    println("Save button pressed")
   }
   
   // MARK: ImageSelectedDelegate
@@ -147,9 +173,8 @@ class ViewController: UIViewController, imageSelectedProtocol, UICollectionViewD
     let imageViewConstraintHorizontal = NSLayoutConstraint.constraintsWithVisualFormat("H:|-8-[imageView]-8-|", options: nil, metrics: nil, views: views)
     //pinning to default margins?
     rootView.addConstraints(imageViewConstraintHorizontal)
-//    imageView.contentMode = stuff.scaleToFill stuff
     
-    let collectionViewConstraintsHorizontal = NSLayoutConstraint.constraintsWithVisualFormat("H:|-[collectionView]-|", options: nil, metrics: nil, views: views)
+    let collectionViewConstraintsHorizontal = NSLayoutConstraint.constraintsWithVisualFormat("H:|[collectionView]|", options: nil, metrics: nil, views: views)
     rootView.addConstraints(collectionViewConstraintsHorizontal)
     let collectionViewConstraintHeight = NSLayoutConstraint.constraintsWithVisualFormat("V:[collectionView(100)]", options: nil, metrics: nil, views: views)
     self.collectionView.addConstraints(collectionViewConstraintHeight)

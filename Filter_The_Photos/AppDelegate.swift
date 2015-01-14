@@ -22,6 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Set up nav controller
     let navController = UINavigationController(rootViewController: rootVC)
     self.window?.rootViewController = navController
+//    var navigationBarAppearance = UINavigationBar.appearance()
+//    navigationBarAppearance.tintColor = UIColor.blueColor()
     
     return true
   }

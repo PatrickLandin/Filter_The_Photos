@@ -32,8 +32,12 @@ class GalleryViewController: UIViewController, UICollectionViewDataSource, UICol
     self.setupConstraintsOnRootView(rootView, forViews: views)
     self.view = rootView
   }
-  
+  override func viewWillAppear(animated: Bool) {
+    super.viewWillAppear(animated)
 
+    title = "Image Gallery"
+  }
+  
   override func viewDidLoad() {
       super.viewDidLoad()
       self.view.backgroundColor = UIColor.whiteColor()
