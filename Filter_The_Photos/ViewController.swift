@@ -79,7 +79,7 @@ class ViewController: UIViewController, imageSelectedProtocol, UICollectionViewD
     let galleryFilter = UIAlertAction(title: "Filter", style: UIAlertActionStyle.Default) { (action) -> Void in
       self.collectionViewYConstraint.constant = 10
       UIView.animateWithDuration(0.4, animations: { () -> Void in
-        self.view.setNeedsLayout()
+        self.view.layoutIfNeeded()
       })
     }
     self.alertController.addAction(galleryFilter)
@@ -103,7 +103,7 @@ class ViewController: UIViewController, imageSelectedProtocol, UICollectionViewD
   func doneButtonPressed() {
     self.collectionViewYConstraint.constant = (-200)
     UIView.animateWithDuration(0.4, animations: { () -> Void in
-      self.view.setNeedsLayout()
+      self.view.layoutIfNeeded()
     })
   }
   
