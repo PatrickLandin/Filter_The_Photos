@@ -21,6 +21,7 @@
 		ECC70CA61A649323007D6706 /* TigerPlayers.jpg in Resources */ = {isa = PBXBuildFile; fileRef = ECC70CA51A649323007D6706 /* TigerPlayers.jpg */; };
 		ECC70CA81A64932F007D6706 /* SeattleFromSky.jpg in Resources */ = {isa = PBXBuildFile; fileRef = ECC70CA71A64932F007D6706 /* SeattleFromSky.jpg */; };
 		ECC70CAA1A64933B007D6706 /* RoadNowhere.jpg in Resources */ = {isa = PBXBuildFile; fileRef = ECC70CA91A64933B007D6706 /* RoadNowhere.jpg */; };
+		ECE278281A65C92A0009C0AF /* Thumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE278271A65C92A0009C0AF /* Thumbnail.swift */; };
 		ECFF7D7E1A64987E006A8E0B /* MericaVette.jpg in Resources */ = {isa = PBXBuildFile; fileRef = ECFF7D7D1A64987E006A8E0B /* MericaVette.jpg */; };
 		ECFF7D841A64A774006A8E0B /* RainbowCam.png in Resources */ = {isa = PBXBuildFile; fileRef = ECFF7D831A64A774006A8E0B /* RainbowCam.png */; };
 /* End PBXBuildFile section */
@@ -54,6 +55,7 @@
 		ECC70CA51A649323007D6706 /* TigerPlayers.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = TigerPlayers.jpg; sourceTree = "<group>"; };
 		ECC70CA71A64932F007D6706 /* SeattleFromSky.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = SeattleFromSky.jpg; sourceTree = "<group>"; };
 		ECC70CA91A64933B007D6706 /* RoadNowhere.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = RoadNowhere.jpg; sourceTree = "<group>"; };
+		ECE278271A65C92A0009C0AF /* Thumbnail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Thumbnail.swift; sourceTree = "<group>"; };
 		ECFF7D7D1A64987E006A8E0B /* MericaVette.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = MericaVette.jpg; sourceTree = "<group>"; };
 		ECFF7D831A64A774006A8E0B /* RainbowCam.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RainbowCam.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -100,6 +102,7 @@
 				ECA533BF1A646F8600E84D04 /* AppDelegate.swift */,
 				ECA533C11A646F8600E84D04 /* ViewController.swift */,
 				ECC70C9B1A648A09007D6706 /* GalleryViewController.swift */,
+				ECE278271A65C92A0009C0AF /* Thumbnail.swift */,
 				ECC70C9D1A648ECA007D6706 /* GalleryCell.swift */,
 				ECFF7D791A649675006A8E0B /* Pictures */,
 				ECA533C61A646F8600E84D04 /* Images.xcassets */,
@@ -261,6 +264,7 @@
 				ECC70C9E1A648ECA007D6706 /* GalleryCell.swift in Sources */,
 				ECC70C9C1A648A0A007D6706 /* GalleryViewController.swift in Sources */,
 				ECA533C21A646F8600E84D04 /* ViewController.swift in Sources */,
+				ECE278281A65C92A0009C0AF /* Thumbnail.swift in Sources */,
 				ECA533C01A646F8600E84D04 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
