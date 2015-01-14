@@ -65,6 +65,10 @@ class GalleryViewController: UIViewController, UICollectionViewDataSource, UICol
     let cell = collectionView.dequeueReusableCellWithReuseIdentifier("GALLERY_CELL", forIndexPath: indexPath) as GalleryCell
     let image = self.images[indexPath.row]
     cell.imageView.image = image
+    
+    cell.layer.cornerRadius = 15.0
+    cell.layer.masksToBounds = true
+    
     return cell
   }
   

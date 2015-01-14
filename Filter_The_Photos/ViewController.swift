@@ -23,7 +23,10 @@ class ViewController: UIViewController, imageSelectedProtocol, UICollectionViewD
   override func loadView() {
     let rootView = UIView(frame: UIScreen.mainScreen().bounds)
     rootView.backgroundColor = UIColor.blackColor()
-    
+    imageView.setTranslatesAutoresizingMaskIntoConstraints(false)
+    rootView.addSubview(imageView)
+    imageView.layer.masksToBounds = true
+    imageView.layer.cornerRadius = 20.0
     let photoButton = UIButton()
     photoButton.setTranslatesAutoresizingMaskIntoConstraints(false)
     rootView.addSubview(photoButton)
@@ -39,11 +42,6 @@ class ViewController: UIViewController, imageSelectedProtocol, UICollectionViewD
     self.collectionView.setTranslatesAutoresizingMaskIntoConstraints(false)
     self.collectionView.registerClass(GalleryCell.self, forCellWithReuseIdentifier: "FILTER_CELL")
     
-    imageView.setTranslatesAutoresizingMaskIntoConstraints(false)
-    rootView.addSubview(imageView)
-    imageView.layer.masksToBounds = true
-    imageView.layer.cornerRadius = 10.0
-    
     let views = ["photoButton" : photoButton, "imageView" : self.imageView, "collectionView" : self.collectionView]
     self.setupConstraintsOnRootView(rootView, forViews: views)
     self.view = rootView
@@ -58,19 +56,18 @@ class ViewController: UIViewController, imageSelectedProtocol, UICollectionViewD
       galleryVC.delegate = self
       self.navigationController?.pushViewController(galleryVC, animated: true )
     }
+    self.alertController.addAction(galleryOption)
     
     let galleryCancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel) { (action) -> Void in
     }
+    self.alertController.addAction(galleryCancel)
     
     let galleryFilter = UIAlertAction(title: "Filter", style: UIAlertActionStyle.Default) { (action) -> Void in
       self.collectionViewYConstraint.constant = 10
       UIView.animateWithDuration(0.4, animations: { () -> Void in
         self.view.setNeedsLayout()
-        // What???
       })
     }
-    self.alertController.addAction(galleryOption)
-    self.alertController.addAction(galleryCancel)
     self.alertController.addAction(galleryFilter)
     
     let options = [kCIContextWorkingColorSpace : NSNull()] // helps keep things fast
@@ -98,7 +95,6 @@ class ViewController: UIViewController, imageSelectedProtocol, UICollectionViewD
       thumbnail.originalImage = self.originalThumbnail
     }
     self.collectionView.reloadData()
-//    for loop through images later
   }
   
   // MARK: Button Stuff
@@ -115,12 +111,21 @@ class ViewController: UIViewController, imageSelectedProtocol, UICollectionViewD
   
   // MARK: UICollectionView DataSource
   func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return 20
-//    return self.thumbnails.count
+    return self.thumbnails.count
   }
   
   func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCellWithReuseIdentifier("FILTER_CELL", forIndexPath: indexPath) as GalleryCell
+    let thumbnail = self.thumbnails[indexPath.row]
+    if thumbnail.originalImage != nil {
+      if thumbnail.filteredImage == nil {
+        thumbnail.generateFilteredImage()
+        cell.imageView.image = thumbnail.filteredImage!
+      }
+    }
+    
+    cell.layer.cornerRadius = 10.0
+    cell.layer.masksToBounds = true
     
     return cell
   }
