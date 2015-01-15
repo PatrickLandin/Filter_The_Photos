@@ -17,10 +17,11 @@ class GalleryViewController: UIViewController, UICollectionViewDataSource, UICol
   var collectionView : UICollectionView!
   var images = [UIImage]()
   var delegate : imageSelectedProtocol?
+  var collectionViewFlowLayout : UICollectionViewFlowLayout!
 
   override func loadView() {
     let rootView = UIView(frame: UIScreen.mainScreen().bounds)
-    let collectionViewFlowLayout = UICollectionViewFlowLayout()
+    self.collectionViewFlowLayout = UICollectionViewFlowLayout()
     self.collectionView = UICollectionView(frame: rootView.frame, collectionViewLayout: collectionViewFlowLayout)
     rootView.addSubview(self.collectionView)
     self.collectionView.dataSource = self
@@ -58,9 +59,43 @@ class GalleryViewController: UIViewController, UICollectionViewDataSource, UICol
       self.images.append(image6!)
       self.images.append(image7!)
       self.images.append(image8!)
+    
+    let pinchRecognizer = UIPinchGestureRecognizer(target: self, action: "collectionViewPinched:")
+    self.collectionView.addGestureRecognizer(pinchRecognizer)
+    
         // Do any additional setup after loading the view.
     }
-
+  
+  // MARK: Gesture Recognizer
+  func collectionViewPinched(sender: UIPinchGestureRecognizer) {
+    
+    switch sender.state {
+    case .Began:
+      println("Began")
+    case .Changed:
+      println("Changed with velocity \(sender.velocity)")
+      self.collectionView.performBatchUpdates({ () -> Void in
+        if sender.velocity > 0 {
+          //increase item size
+          let newSize = CGSize(width: self.collectionViewFlowLayout.itemSize.width * 1.03, height: self.collectionViewFlowLayout.itemSize.height * 1.03)
+          self.collectionViewFlowLayout.itemSize = newSize
+        } else if sender.velocity < 0 {
+          let newSize = CGSize(width: self.collectionViewFlowLayout.itemSize.width / 1.03, height: self.collectionViewFlowLayout.itemSize.height / 1.03)
+          self.collectionViewFlowLayout.itemSize = newSize
+          //decrease item size
+        }
+        }, completion: {(finished) -> Void in
+      })
+    case .Ended:
+      println("Ended")
+      
+    default:
+      println("default")
+    }
+    println("collectionViewPinched")
+  }
+  
+  // MARK: UICollectionViewDataSource
   func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return self.images.count
   }

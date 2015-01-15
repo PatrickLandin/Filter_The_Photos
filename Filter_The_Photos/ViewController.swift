@@ -11,7 +11,7 @@ import Social
 
 class ViewController: UIViewController, imageSelectedProtocol, UICollectionViewDataSource, UICollectionViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
   
-  let alertController = UIAlertController(title: "Stuff", message: "More Stuff", preferredStyle: UIAlertControllerStyle.ActionSheet)
+  let alertController = UIAlertController(title: "Filter your Photos!", message: "Find a photo, take a photo, filter a photo. Or, you can press cancel...", preferredStyle: UIAlertControllerStyle.ActionSheet)
   let imageView = UIImageView()
 //  let imageViewPic = UIImage(named: "AustinJackson")
 //  let imageView = UIImageView(image: imageViewPic)
@@ -81,7 +81,7 @@ class ViewController: UIViewController, imageSelectedProtocol, UICollectionViewD
     }
     self.alertController.addAction(galleryCancel)
     
-    let galleryFilter = UIAlertAction(title: "Filter", style: UIAlertActionStyle.Default) { (action) -> Void in
+    let galleryFilter = UIAlertAction(title: "Filters", style: UIAlertActionStyle.Default) { (action) -> Void in
       self.collectionViewYConstraint.constant = 10
       self.imageViewBottomConstraint.constant = self.imageView.frame.height * 0.2
       
@@ -106,7 +106,7 @@ class ViewController: UIViewController, imageSelectedProtocol, UICollectionViewD
       self.alertController.addAction(cameraOption)
     }
     
-    let photoOption = UIAlertAction(title: "Photos", style: .Default) { (action) -> Void in
+    let photoOption = UIAlertAction(title: "Cloud", style: .Default) { (action) -> Void in
       let photosVC = PhotosViewController()
       photosVC.destinationImageSize = self.imageView.frame.size
       photosVC.delegate = self
