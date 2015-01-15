@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import Social
 
-class ViewController: UIViewController, imageSelectedProtocol, UICollectionViewDataSource {
+class ViewController: UIViewController, imageSelectedProtocol, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
   
   let alertController = UIAlertController(title: "Stuff", message: "More Stuff", preferredStyle: UIAlertControllerStyle.ActionSheet)
   let imageView = UIImageView()
@@ -21,6 +22,13 @@ class ViewController: UIViewController, imageSelectedProtocol, UICollectionViewD
   let imageQueue = NSOperationQueue()
   var gpuContext : CIContext!
   var thumbnails = [Thumbnail]()
+  
+  var doneButton : UIBarButtonItem!
+  var shareButton : UIBarButtonItem!
+  
+  var imageViewBottomConstraint : NSLayoutConstraint!
+  var imageViewLeftConstraint : NSLayoutConstraint!
+  var imageViewRightConstraint : NSLayoutConstraint!
   
   override func loadView() {
     let rootView = UIView(frame: UIScreen.mainScreen().bounds)
@@ -48,21 +56,15 @@ class ViewController: UIViewController, imageSelectedProtocol, UICollectionViewD
     self.setupConstraintsOnRootView(rootView, forViews: views)
     self.view = rootView
   }
-  
-  override func viewWillAppear(animated: Bool) {
-    super.viewWillAppear(animated)
-    
-    var doneButton = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: "doneButtonPressed") //Use a selector
-    navigationItem.rightBarButtonItem = doneButton
-    var saveButton = UIBarButtonItem(barButtonSystemItem: .Save, target: self, action: "saveButtonPressed")
-    navigationItem.leftBarButtonItem = saveButton
-//    navigationController!.navigationBar.barTintColor = UIColor.whiteColor()
-    title = "Filter"
-  }
 
   override func viewDidLoad() {
     super.viewDidLoad()
     self.navigationItem.title = "Filet the Photos"
+    
+    var doneButton = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: "doneButtonPressed")
+    self.shareButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Action, target: self, action: "shareButtonPressed")
+    self.navigationItem.rightBarButtonItem = self.shareButton
+    //    navigationController!.navigationBar.barTintColor = UIColor.whiteColor()
     
     let galleryOption = UIAlertAction(title: "Gallery", style: UIAlertActionStyle.Default) { (action) -> Void in
       println("Gallery Pressed")
@@ -81,8 +83,31 @@ class ViewController: UIViewController, imageSelectedProtocol, UICollectionViewD
       UIView.animateWithDuration(0.4, animations: { () -> Void in
         self.view.layoutIfNeeded()
       })
+      let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Done, target: self, action: "doneButtonPressed")
+      self.navigationItem.rightBarButtonItem = doneButton
     }
     self.alertController.addAction(galleryFilter)
+    
+    
+    if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
+      let cameraOption = UIAlertAction(title: "Camera", style: .Default, handler: { (action) -> Void in
+        
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.sourceType = UIImagePickerControllerSourceType.Camera
+        imagePickerController.allowsEditing = true
+        imagePickerController.delegate = self
+        self.presentViewController(imagePickerController, animated: true, completion: nil)
+      })
+      self.alertController.addAction(cameraOption)
+    }
+    
+    let photoOption = UIAlertAction(title: "Photos", style: .Default) { (action) -> Void in
+      let photosVC = PhotosViewController()
+      photosVC.destinationImageSize = self.imageView.frame.size
+      photosVC.delegate = self
+      self.navigationController?.pushViewController(photosVC, animated: true)
+    }
+    self.alertController.addAction(photoOption)
     
     let options = [kCIContextWorkingColorSpace : NSNull()] // helps keep things fast
     let eaglContext = EAGLContext(API: EAGLRenderingAPI.OpenGLES2)
@@ -91,24 +116,13 @@ class ViewController: UIViewController, imageSelectedProtocol, UICollectionViewD
     // Do any additional setup after loading the view, typically from a nib.
   }
   
+  //MARK: Setup Thumbnails
   func setupThumbnails() {
     self.filterNames = ["CISepiaTone","CIPhotoEffectChrome", "CIPhotoEffectNoir"]
     for name in self.filterNames {
       let thumbnail = Thumbnail(filterName: name, operationQueue: self.imageQueue, context: self.gpuContext)
       self.thumbnails.append(thumbnail)
     }
-  }
-  
-  //MARK: Navigation button methods
-  func doneButtonPressed() {
-    self.collectionViewYConstraint.constant = (-200)
-    UIView.animateWithDuration(0.4, animations: { () -> Void in
-      self.view.layoutIfNeeded()
-    })
-  }
-  
-  func saveButtonPressed() {
-    println("Save button pressed")
   }
   
   // MARK: ImageSelectedDelegate
@@ -119,11 +133,23 @@ class ViewController: UIViewController, imageSelectedProtocol, UICollectionViewD
     
     for thumbnail in self.thumbnails {
       thumbnail.originalImage = self.originalThumbnail
+      thumbnail.filteredImage = nil
     }
     self.collectionView.reloadData()
   }
   
-  // MARK: Button Stuff
+  // MARK: UIImagePickerController
+  func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+    let image = info[UIImagePickerControllerEditedImage] as? UIImage
+    self.controllerDidSelectImage(image!)
+    picker.dismissViewControllerAnimated(true, completion: nil)
+  }
+  
+  func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+    picker.dismissViewControllerAnimated(true, completion: nil)
+  }
+  
+  // MARK: Button Selectors
   func photoButtonPressed(sender : UIButton) {
     self.presentViewController(self.alertController, animated: true, completion: nil)
   }
@@ -133,6 +159,26 @@ class ViewController: UIViewController, imageSelectedProtocol, UICollectionViewD
     UIGraphicsBeginImageContext(size)
     originalImage.drawInRect(CGRect(x: 0, y: 0, width: 100, height: 100))
     self.originalThumbnail = UIGraphicsGetImageFromCurrentImageContext()
+    //endimagecontext
+  }
+  
+  func doneButtonPressed() {
+    println("done button pressed")
+    self.collectionViewYConstraint.constant = (-120)
+    UIView.animateWithDuration(0.4, animations: { () -> Void in
+      self.view.layoutIfNeeded()
+    })
+    self.navigationItem.rightBarButtonItem = self.shareButton
+  }
+  
+  func shareButtonPressed() {
+    if SLComposeViewController.isAvailableForServiceType(SLServiceTypeTwitter) {
+      let composeViewController = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
+      composeViewController.addImage(self.imageView.image)
+      self.presentViewController(composeViewController, animated: true, completion: nil)
+    } else {
+      //tell user to sign into to twitter to use this feature
+    }
   }
   
   // MARK: UICollectionView DataSource
@@ -149,7 +195,6 @@ class ViewController: UIViewController, imageSelectedProtocol, UICollectionViewD
         cell.imageView.image = thumbnail.filteredImage!
       }
     }
-    
     cell.layer.cornerRadius = 10.0
     cell.layer.masksToBounds = true
     
@@ -168,11 +213,14 @@ class ViewController: UIViewController, imageSelectedProtocol, UICollectionViewD
     
     let imageView = views["imageView"] as UIView!
     let imageViewConstraintVertical = NSLayoutConstraint.constraintsWithVisualFormat("V:|-75-[imageView]-20-[photoButton]", options: nil, metrics: nil, views: views)
+    self.imageViewBottomConstraint = imageViewConstraintVertical[1] as NSLayoutConstraint
     //72 to get just below nav bar
     rootView.addConstraints(imageViewConstraintVertical)
     let imageViewConstraintHorizontal = NSLayoutConstraint.constraintsWithVisualFormat("H:|-8-[imageView]-8-|", options: nil, metrics: nil, views: views)
-    //pinning to default margins?
+    //pinning to default margins
     rootView.addConstraints(imageViewConstraintHorizontal)
+    self.imageViewLeftConstraint = imageViewConstraintHorizontal[1] as NSLayoutConstraint
+    self.imageViewRightConstraint = imageViewConstraintHorizontal[2] as NSLayoutConstraint
     
     let collectionViewConstraintsHorizontal = NSLayoutConstraint.constraintsWithVisualFormat("H:|[collectionView]|", options: nil, metrics: nil, views: views)
     rootView.addConstraints(collectionViewConstraintsHorizontal)
