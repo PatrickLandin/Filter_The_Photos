@@ -9,7 +9,7 @@
 import UIKit
 import Social
 
-class ViewController: UIViewController, imageSelectedProtocol, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ViewController: UIViewController, imageSelectedProtocol, UICollectionViewDataSource, UICollectionViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
   
   let alertController = UIAlertController(title: "Stuff", message: "More Stuff", preferredStyle: UIAlertControllerStyle.ActionSheet)
   let imageView = UIImageView()
@@ -27,8 +27,8 @@ class ViewController: UIViewController, imageSelectedProtocol, UICollectionViewD
   var shareButton : UIBarButtonItem!
   
   var imageViewBottomConstraint : NSLayoutConstraint!
-  var imageViewLeftConstraint : NSLayoutConstraint!
-  var imageViewRightConstraint : NSLayoutConstraint!
+//  var imageViewLeftConstraint : NSLayoutConstraint!
+//  var imageViewRightConstraint : NSLayoutConstraint!
   
   override func loadView() {
     let rootView = UIView(frame: UIScreen.mainScreen().bounds)
@@ -49,6 +49,7 @@ class ViewController: UIViewController, imageSelectedProtocol, UICollectionViewD
     collectionViewFlowLayout.scrollDirection = .Horizontal
     rootView.addSubview(collectionView)
     self.collectionView.dataSource = self
+    self.collectionView.delegate = self
     self.collectionView.setTranslatesAutoresizingMaskIntoConstraints(false)
     self.collectionView.registerClass(GalleryCell.self, forCellWithReuseIdentifier: "FILTER_CELL")
     
@@ -60,6 +61,8 @@ class ViewController: UIViewController, imageSelectedProtocol, UICollectionViewD
   override func viewDidLoad() {
     super.viewDidLoad()
     self.navigationItem.title = "Filet the Photos"
+    
+//    self.imageView.contentMode
     
     var doneButton = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: "doneButtonPressed")
     self.shareButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Action, target: self, action: "shareButtonPressed")
@@ -80,9 +83,11 @@ class ViewController: UIViewController, imageSelectedProtocol, UICollectionViewD
     
     let galleryFilter = UIAlertAction(title: "Filter", style: UIAlertActionStyle.Default) { (action) -> Void in
       self.collectionViewYConstraint.constant = 10
+      self.imageViewBottomConstraint.constant = self.imageView.frame.height * 0.2
+      
       UIView.animateWithDuration(0.4, animations: { () -> Void in
         self.view.layoutIfNeeded()
-      })
+              })
       let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Done, target: self, action: "doneButtonPressed")
       self.navigationItem.rightBarButtonItem = doneButton
     }
@@ -118,7 +123,7 @@ class ViewController: UIViewController, imageSelectedProtocol, UICollectionViewD
   
   //MARK: Setup Thumbnails
   func setupThumbnails() {
-    self.filterNames = ["CISepiaTone","CIPhotoEffectChrome", "CIPhotoEffectNoir"]
+    self.filterNames = ["CISepiaTone","CIPhotoEffectChrome", "CIPhotoEffectNoir", "CIDotScreen", "CIHatchedScreen"]
     for name in self.filterNames {
       let thumbnail = Thumbnail(filterName: name, operationQueue: self.imageQueue, context: self.gpuContext)
       self.thumbnails.append(thumbnail)
@@ -165,6 +170,7 @@ class ViewController: UIViewController, imageSelectedProtocol, UICollectionViewD
   func doneButtonPressed() {
     println("done button pressed")
     self.collectionViewYConstraint.constant = (-120)
+    self.imageViewBottomConstraint.constant = 20
     UIView.animateWithDuration(0.4, animations: { () -> Void in
       self.view.layoutIfNeeded()
     })
@@ -201,6 +207,22 @@ class ViewController: UIViewController, imageSelectedProtocol, UICollectionViewD
     return cell
   }
   
+  func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    let selectedFilter = self.thumbnails[indexPath.row].filterName
+    
+    let startImage = CIImage(image: self.imageView.image)
+    let filter = CIFilter(name: selectedFilter)
+    filter.setDefaults()
+    filter.setValue(startImage, forKey: kCIInputImageKey)
+    let result = filter.valueForKey(kCIOutputImageKey) as CIImage
+    let extent = result.extent()
+    let imageRef = self.gpuContext.createCGImage(result, fromRect: extent)
+    self.imageView.image = UIImage(CGImage: imageRef)
+    
+    println(selectedFilter)
+    
+  }
+  
   // MARK: Autolayout Constraints
   func setupConstraintsOnRootView(rootView : UIView, forViews views: [String : AnyObject]) {
     
@@ -219,8 +241,8 @@ class ViewController: UIViewController, imageSelectedProtocol, UICollectionViewD
     let imageViewConstraintHorizontal = NSLayoutConstraint.constraintsWithVisualFormat("H:|-8-[imageView]-8-|", options: nil, metrics: nil, views: views)
     //pinning to default margins
     rootView.addConstraints(imageViewConstraintHorizontal)
-    self.imageViewLeftConstraint = imageViewConstraintHorizontal[1] as NSLayoutConstraint
-    self.imageViewRightConstraint = imageViewConstraintHorizontal[2] as NSLayoutConstraint
+//    self.imageViewLeftConstraint = imageViewConstraintHorizontal[0] as NSLayoutConstraint
+//    self.imageViewRightConstraint = imageViewConstraintHorizontal[1] as NSLayoutConstraint
     
     let collectionViewConstraintsHorizontal = NSLayoutConstraint.constraintsWithVisualFormat("H:|[collectionView]|", options: nil, metrics: nil, views: views)
     rootView.addConstraints(collectionViewConstraintsHorizontal)
