@@ -41,6 +41,9 @@ class GalleryViewController: UIViewController, UICollectionViewDataSource, UICol
   
   override func viewDidLoad() {
       super.viewDidLoad()
+    
+    self.navigationItem.title = NSLocalizedString("Gallery", comment: "Nav bar title for GalleryVC")
+    
       self.view.backgroundColor = UIColor.whiteColor()
       self.collectionView.registerClass(GalleryCell.self, forCellWithReuseIdentifier: "GALLERY_CELL")
       let image1 = UIImage(named: "RoadBackground.jpg")

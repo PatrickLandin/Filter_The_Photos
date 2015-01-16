@@ -60,6 +60,7 @@ class ViewController: UIViewController, imageSelectedProtocol, UICollectionViewD
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    
     self.navigationItem.title = NSLocalizedString("Filet the Photos", comment: "Nav bar title")
     
 //    self.imageView.contentMode

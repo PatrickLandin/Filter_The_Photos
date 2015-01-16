@@ -40,6 +40,8 @@ class PhotosViewController: UIViewController, UICollectionViewDataSource, UIColl
     override func viewDidLoad() {
         super.viewDidLoad()
       
+      self.navigationItem.title = NSLocalizedString("Cloud", comment: "Nav bar title for PhotosVC")
+      
       self.imageManager = PHCachingImageManager()
       self.assetsFetchResults = PHAsset.fetchAssetsWithOptions(nil)
       
