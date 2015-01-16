@@ -11,7 +11,7 @@ import Social
 
 class ViewController: UIViewController, imageSelectedProtocol, UICollectionViewDataSource, UICollectionViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
   
-  let alertController = UIAlertController(title: "Filter your Photos!", message: "Find a photo, take a photo, filter a photo. Or, you can press cancel...", preferredStyle: UIAlertControllerStyle.ActionSheet)
+  let alertController = UIAlertController(title: NSLocalizedString("Filter the Photos", comment: "This is the title for our al;ert controller"), message: NSLocalizedString("Find a photo, take a photo, filter a photo.", comment: "This is the message for our alert controller"), preferredStyle: UIAlertControllerStyle.ActionSheet)
   let imageView = UIImageView()
 //  let imageViewPic = UIImage(named: "AustinJackson")
 //  let imageView = UIImageView(image: imageViewPic)
@@ -40,7 +40,7 @@ class ViewController: UIViewController, imageSelectedProtocol, UICollectionViewD
     let photoButton = UIButton()
     photoButton.setTranslatesAutoresizingMaskIntoConstraints(false)
     rootView.addSubview(photoButton)
-    photoButton.setTitle("Photo Options", forState: .Normal)
+    photoButton.setTitle(NSLocalizedString("Photo Options", comment: "Title for main photos button"), forState: .Normal)
     photoButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
     photoButton.addTarget(self, action: "photoButtonPressed:", forControlEvents: UIControlEvents.TouchUpInside)
     let collectionViewFlowLayout = UICollectionViewFlowLayout()
@@ -60,7 +60,7 @@ class ViewController: UIViewController, imageSelectedProtocol, UICollectionViewD
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    self.navigationItem.title = "Filet the Photos"
+    self.navigationItem.title = NSLocalizedString("Filet the Photos", comment: "Nav bar title")
     
 //    self.imageView.contentMode
     
@@ -69,7 +69,7 @@ class ViewController: UIViewController, imageSelectedProtocol, UICollectionViewD
     self.navigationItem.rightBarButtonItem = self.shareButton
     //    navigationController!.navigationBar.barTintColor = UIColor.whiteColor()
     
-    let galleryOption = UIAlertAction(title: "Gallery", style: UIAlertActionStyle.Default) { (action) -> Void in
+    let galleryOption = UIAlertAction(title: NSLocalizedString("Gallery", comment: "Title for gallery button"), style: UIAlertActionStyle.Default) { (action) -> Void in
       println("Gallery Pressed")
       let galleryVC = GalleryViewController()
       galleryVC.delegate = self
@@ -77,25 +77,24 @@ class ViewController: UIViewController, imageSelectedProtocol, UICollectionViewD
     }
     self.alertController.addAction(galleryOption)
     
-    let galleryCancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel) { (action) -> Void in
+    let galleryCancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Title for cancel button"), style: UIAlertActionStyle.Cancel) { (action) -> Void in
     }
     self.alertController.addAction(galleryCancel)
     
-    let galleryFilter = UIAlertAction(title: "Filters", style: UIAlertActionStyle.Default) { (action) -> Void in
+    let galleryFilter = UIAlertAction(title: NSLocalizedString("Filters", comment : "Title for filters button"), style: UIAlertActionStyle.Default) { (action) -> Void in
       self.collectionViewYConstraint.constant = 10
       self.imageViewBottomConstraint.constant = self.imageView.frame.height * 0.2
       
       UIView.animateWithDuration(0.4, animations: { () -> Void in
         self.view.layoutIfNeeded()
               })
-      let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Done, target: self, action: "doneButtonPressed")
+      let doneButton = UIBarButtonItem(title: NSLocalizedString("Done", comment: "Done button"), style: UIBarButtonItemStyle.Done, target: self, action: "doneButtonPressed")
       self.navigationItem.rightBarButtonItem = doneButton
     }
     self.alertController.addAction(galleryFilter)
     
-    
     if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
-      let cameraOption = UIAlertAction(title: "Camera", style: .Default, handler: { (action) -> Void in
+      let cameraOption = UIAlertAction(title: NSLocalizedString("Camera", comment: "Title for camera button"), style: .Default, handler: { (action) -> Void in
         
         let imagePickerController = UIImagePickerController()
         imagePickerController.sourceType = UIImagePickerControllerSourceType.Camera
@@ -106,7 +105,7 @@ class ViewController: UIViewController, imageSelectedProtocol, UICollectionViewD
       self.alertController.addAction(cameraOption)
     }
     
-    let photoOption = UIAlertAction(title: "Cloud", style: .Default) { (action) -> Void in
+    let photoOption = UIAlertAction(title: NSLocalizedString("Cloud", comment: "Title for cloud photos button"), style: .Default) { (action) -> Void in
       let photosVC = PhotosViewController()
       photosVC.destinationImageSize = self.imageView.frame.size
       photosVC.delegate = self

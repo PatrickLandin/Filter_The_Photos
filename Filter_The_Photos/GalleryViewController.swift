@@ -36,7 +36,7 @@ class GalleryViewController: UIViewController, UICollectionViewDataSource, UICol
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(animated)
 
-    title = "Image Gallery"
+//    title = "Image Gallery"
   }
   
   override func viewDidLoad() {

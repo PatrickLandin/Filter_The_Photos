@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EC80AC7E1A68804C009EDC89 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EC80AC801A68804C009EDC89 /* Localizable.strings */; };
 		ECA533C01A646F8600E84D04 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA533BF1A646F8600E84D04 /* AppDelegate.swift */; };
 		ECA533C21A646F8600E84D04 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA533C11A646F8600E84D04 /* ViewController.swift */; };
 		ECA533C71A646F8600E84D04 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECA533C61A646F8600E84D04 /* Images.xcassets */; };
@@ -38,6 +39,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		EC80AC7F1A68804C009EDC89 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		EC80AC811A688076009EDC89 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		EC80AC821A688076009EDC89 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		ECA533BA1A646F8600E84D04 /* Filter_The_Photos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Filter_The_Photos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECA533BE1A646F8600E84D04 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ECA533BF1A646F8600E84D04 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -106,6 +110,7 @@
 				ECC70C9B1A648A09007D6706 /* GalleryViewController.swift */,
 				ECFDD6EB1A6719D70007272B /* PhotosViewController.swift */,
 				ECE278271A65C92A0009C0AF /* Thumbnail.swift */,
+				EC80AC801A68804C009EDC89 /* Localizable.strings */,
 				ECC70C9D1A648ECA007D6706 /* GalleryCell.swift */,
 				ECFF7D791A649675006A8E0B /* Pictures */,
 				ECA533C61A646F8600E84D04 /* Images.xcassets */,
@@ -219,6 +224,7 @@
 			knownRegions = (
 				en,
 				Base,
+				fr,
 			);
 			mainGroup = ECA533B11A646F8600E84D04;
 			productRefGroup = ECA533BB1A646F8600E84D04 /* Products */;
@@ -237,6 +243,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ECA533CA1A646F8600E84D04 /* LaunchScreen.xib in Resources */,
+				EC80AC7E1A68804C009EDC89 /* Localizable.strings in Resources */,
 				ECC70CA61A649323007D6706 /* TigerPlayers.jpg in Resources */,
 				ECA533C71A646F8600E84D04 /* Images.xcassets in Resources */,
 				ECFF7D7E1A64987E006A8E0B /* MericaVette.jpg in Resources */,
@@ -292,10 +299,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		EC80AC801A68804C009EDC89 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EC80AC7F1A68804C009EDC89 /* en */,
+				EC80AC821A688076009EDC89 /* fr */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		ECA533C81A646F8600E84D04 /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				ECA533C91A646F8600E84D04 /* Base */,
+				EC80AC811A688076009EDC89 /* fr */,
 			);
 			name = LaunchScreen.xib;
 			sourceTree = "<group>";
