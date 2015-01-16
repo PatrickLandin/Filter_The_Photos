@@ -8,6 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		EC80AC7E1A68804C009EDC89 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EC80AC801A68804C009EDC89 /* Localizable.strings */; };
+		EC80AC871A689807009EDC89 /* RoadBackground2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EC80AC831A689807009EDC89 /* RoadBackground2x.jpg */; };
+		EC80AC881A689807009EDC89 /* RoadNowhere2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EC80AC841A689807009EDC89 /* RoadNowhere2x.jpg */; };
+		EC80AC891A689807009EDC89 /* SeattleFromSky2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EC80AC851A689807009EDC89 /* SeattleFromSky2x.jpg */; };
+		EC80AC8A1A689807009EDC89 /* TigerPlayers2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EC80AC861A689807009EDC89 /* TigerPlayers2x.jpg */; };
+		EC80AC8F1A689834009EDC89 /* AustinJackson2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EC80AC8B1A689834009EDC89 /* AustinJackson2x.png */; };
+		EC80AC901A689834009EDC89 /* BaseballGrass2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EC80AC8C1A689834009EDC89 /* BaseballGrass2x.jpg */; };
+		EC80AC911A689834009EDC89 /* FireImpreza2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EC80AC8D1A689834009EDC89 /* FireImpreza2x.jpg */; };
+		EC80AC921A689834009EDC89 /* MericaVette2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EC80AC8E1A689834009EDC89 /* MericaVette2x.jpg */; };
 		ECA533C01A646F8600E84D04 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA533BF1A646F8600E84D04 /* AppDelegate.swift */; };
 		ECA533C21A646F8600E84D04 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA533C11A646F8600E84D04 /* ViewController.swift */; };
 		ECA533C71A646F8600E84D04 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECA533C61A646F8600E84D04 /* Images.xcassets */; };
@@ -42,6 +50,14 @@
 		EC80AC7F1A68804C009EDC89 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		EC80AC811A688076009EDC89 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		EC80AC821A688076009EDC89 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		EC80AC831A689807009EDC89 /* RoadBackground2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = RoadBackground2x.jpg; sourceTree = "<group>"; };
+		EC80AC841A689807009EDC89 /* RoadNowhere2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = RoadNowhere2x.jpg; sourceTree = "<group>"; };
+		EC80AC851A689807009EDC89 /* SeattleFromSky2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = SeattleFromSky2x.jpg; sourceTree = "<group>"; };
+		EC80AC861A689807009EDC89 /* TigerPlayers2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = TigerPlayers2x.jpg; sourceTree = "<group>"; };
+		EC80AC8B1A689834009EDC89 /* AustinJackson2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AustinJackson2x.png; sourceTree = "<group>"; };
+		EC80AC8C1A689834009EDC89 /* BaseballGrass2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = BaseballGrass2x.jpg; sourceTree = "<group>"; };
+		EC80AC8D1A689834009EDC89 /* FireImpreza2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = FireImpreza2x.jpg; sourceTree = "<group>"; };
+		EC80AC8E1A689834009EDC89 /* MericaVette2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = MericaVette2x.jpg; sourceTree = "<group>"; };
 		ECA533BA1A646F8600E84D04 /* Filter_The_Photos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Filter_The_Photos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECA533BE1A646F8600E84D04 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ECA533BF1A646F8600E84D04 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -157,6 +173,14 @@
 				ECFF7D7D1A64987E006A8E0B /* MericaVette.jpg */,
 				ECC70C991A647FEC007D6706 /* AustinJackson.png */,
 				ECFF7D831A64A774006A8E0B /* RainbowCam.png */,
+				EC80AC831A689807009EDC89 /* RoadBackground2x.jpg */,
+				EC80AC841A689807009EDC89 /* RoadNowhere2x.jpg */,
+				EC80AC851A689807009EDC89 /* SeattleFromSky2x.jpg */,
+				EC80AC861A689807009EDC89 /* TigerPlayers2x.jpg */,
+				EC80AC8B1A689834009EDC89 /* AustinJackson2x.png */,
+				EC80AC8C1A689834009EDC89 /* BaseballGrass2x.jpg */,
+				EC80AC8D1A689834009EDC89 /* FireImpreza2x.jpg */,
+				EC80AC8E1A689834009EDC89 /* MericaVette2x.jpg */,
 			);
 			name = Pictures;
 			sourceTree = "<group>";
@@ -242,17 +266,25 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC80AC871A689807009EDC89 /* RoadBackground2x.jpg in Resources */,
 				ECA533CA1A646F8600E84D04 /* LaunchScreen.xib in Resources */,
+				EC80AC8F1A689834009EDC89 /* AustinJackson2x.png in Resources */,
 				EC80AC7E1A68804C009EDC89 /* Localizable.strings in Resources */,
 				ECC70CA61A649323007D6706 /* TigerPlayers.jpg in Resources */,
+				EC80AC921A689834009EDC89 /* MericaVette2x.jpg in Resources */,
+				EC80AC881A689807009EDC89 /* RoadNowhere2x.jpg in Resources */,
+				EC80AC911A689834009EDC89 /* FireImpreza2x.jpg in Resources */,
 				ECA533C71A646F8600E84D04 /* Images.xcassets in Resources */,
 				ECFF7D7E1A64987E006A8E0B /* MericaVette.jpg in Resources */,
 				ECFF7D841A64A774006A8E0B /* RainbowCam.png in Resources */,
 				ECC70CA01A649303007D6706 /* BaseballGrass.jpg in Resources */,
+				EC80AC901A689834009EDC89 /* BaseballGrass2x.jpg in Resources */,
 				ECC70CA41A64931B007D6706 /* RoadBackground.jpg in Resources */,
 				ECC70CA81A64932F007D6706 /* SeattleFromSky.jpg in Resources */,
 				ECC70C9A1A647FEC007D6706 /* AustinJackson.png in Resources */,
+				EC80AC8A1A689807009EDC89 /* TigerPlayers2x.jpg in Resources */,
 				ECC70CAA1A64933B007D6706 /* RoadNowhere.jpg in Resources */,
+				EC80AC891A689807009EDC89 /* SeattleFromSky2x.jpg in Resources */,
 				ECC70CA21A649311007D6706 /* FireImpreza.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
