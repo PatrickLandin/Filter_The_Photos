@@ -11,7 +11,7 @@ import Social
 
 class ViewController: UIViewController, imageSelectedProtocol, UICollectionViewDataSource, UICollectionViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
   
-  let alertController = UIAlertController(title: NSLocalizedString("Filter the Photos", comment: "This is the title for our al;ert controller"), message: NSLocalizedString("Find a photo, take a photo, filter a photo.", comment: "This is the message for our alert controller"), preferredStyle: UIAlertControllerStyle.ActionSheet)
+  let alertController = UIAlertController(title: NSLocalizedString("Filter the Photos", comment: "This is the title for our alert controller"), message: NSLocalizedString("Find a photo, take a photo, filter a photo.", comment: "This is the message for our alert controller"), preferredStyle: UIAlertControllerStyle.ActionSheet)
   let imageView = UIImageView()
 //  let imageViewPic = UIImage(named: "AustinJackson")
 //  let imageView = UIImageView(image: imageViewPic)
@@ -25,6 +25,7 @@ class ViewController: UIViewController, imageSelectedProtocol, UICollectionViewD
   
   var doneButton : UIBarButtonItem!
   var shareButton : UIBarButtonItem!
+  let photoButton = UIButton()
   
   var imageViewBottomConstraint : NSLayoutConstraint!
 //  var imageViewLeftConstraint : NSLayoutConstraint!
@@ -37,7 +38,7 @@ class ViewController: UIViewController, imageSelectedProtocol, UICollectionViewD
     rootView.addSubview(imageView)
     imageView.layer.masksToBounds = true
     imageView.layer.cornerRadius = 20.0
-    let photoButton = UIButton()
+//    let photoButton = UIButton()
     photoButton.setTranslatesAutoresizingMaskIntoConstraints(false)
     rootView.addSubview(photoButton)
     photoButton.setTitle(NSLocalizedString("Photo Options", comment: "Title for main photos button"), forState: .Normal)
@@ -45,7 +46,7 @@ class ViewController: UIViewController, imageSelectedProtocol, UICollectionViewD
     photoButton.addTarget(self, action: "photoButtonPressed:", forControlEvents: UIControlEvents.TouchUpInside)
     let collectionViewFlowLayout = UICollectionViewFlowLayout()
     self.collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: collectionViewFlowLayout)
-    collectionViewFlowLayout.itemSize = CGSize(width: 100, height: 100)
+    collectionViewFlowLayout.itemSize = CGSize(width: 80, height: 80)
     collectionViewFlowLayout.scrollDirection = .Horizontal
     rootView.addSubview(collectionView)
     self.collectionView.dataSource = self
@@ -63,12 +64,12 @@ class ViewController: UIViewController, imageSelectedProtocol, UICollectionViewD
     
     self.navigationItem.title = NSLocalizedString("Filet the Photos", comment: "Nav bar title")
     
-//    self.imageView.contentMode
+    self.imageView.contentMode = UIViewContentMode.ScaleAspectFit
     
     var doneButton = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: "doneButtonPressed")
     self.shareButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Action, target: self, action: "shareButtonPressed")
     self.navigationItem.rightBarButtonItem = self.shareButton
-    //    navigationController!.navigationBar.barTintColor = UIColor.whiteColor()
+    
     
     let galleryOption = UIAlertAction(title: NSLocalizedString("Gallery", comment: "Title for gallery button"), style: UIAlertActionStyle.Default) { (action) -> Void in
       println("Gallery Pressed")
@@ -83,8 +84,9 @@ class ViewController: UIViewController, imageSelectedProtocol, UICollectionViewD
     self.alertController.addAction(galleryCancel)
     
     let galleryFilter = UIAlertAction(title: NSLocalizedString("Filters", comment : "Title for filters button"), style: UIAlertActionStyle.Default) { (action) -> Void in
-      self.collectionViewYConstraint.constant = 10
+      self.collectionViewYConstraint.constant = 30
       self.imageViewBottomConstraint.constant = self.imageView.frame.height * 0.2
+      self.photoButton.hidden = true
       
       UIView.animateWithDuration(0.4, animations: { () -> Void in
         self.view.layoutIfNeeded()
@@ -209,6 +211,7 @@ class ViewController: UIViewController, imageSelectedProtocol, UICollectionViewD
   
   func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
     let selectedFilter = self.thumbnails[indexPath.row].filterName
+    let imageOrientation = self.imageView.image?.imageOrientation
     
     let startImage = CIImage(image: self.imageView.image)
     let filter = CIFilter(name: selectedFilter)
@@ -217,8 +220,8 @@ class ViewController: UIViewController, imageSelectedProtocol, UICollectionViewD
     let result = filter.valueForKey(kCIOutputImageKey) as CIImage
     let extent = result.extent()
     let imageRef = self.gpuContext.createCGImage(result, fromRect: extent)
-    self.imageView.image = UIImage(CGImage: imageRef)
-    
+    self.imageView.image = UIImage(CGImage: imageRef, scale: 1.0, orientation: imageOrientation!)
+
     println(selectedFilter)
     
   }
