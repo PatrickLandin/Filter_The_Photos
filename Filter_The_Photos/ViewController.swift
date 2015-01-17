@@ -46,7 +46,7 @@ class ViewController: UIViewController, imageSelectedProtocol, UICollectionViewD
     photoButton.addTarget(self, action: "photoButtonPressed:", forControlEvents: UIControlEvents.TouchUpInside)
     let collectionViewFlowLayout = UICollectionViewFlowLayout()
     self.collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: collectionViewFlowLayout)
-    collectionViewFlowLayout.itemSize = CGSize(width: 80, height: 80)
+    collectionViewFlowLayout.itemSize = CGSize(width: 82, height: 82)
     collectionViewFlowLayout.scrollDirection = .Horizontal
     rootView.addSubview(collectionView)
     self.collectionView.dataSource = self
@@ -70,7 +70,6 @@ class ViewController: UIViewController, imageSelectedProtocol, UICollectionViewD
     self.shareButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Action, target: self, action: "shareButtonPressed")
     self.navigationItem.rightBarButtonItem = self.shareButton
     
-    
     let galleryOption = UIAlertAction(title: NSLocalizedString("Gallery", comment: "Title for gallery button"), style: UIAlertActionStyle.Default) { (action) -> Void in
       println("Gallery Pressed")
       let galleryVC = GalleryViewController()
@@ -86,7 +85,7 @@ class ViewController: UIViewController, imageSelectedProtocol, UICollectionViewD
     let galleryFilter = UIAlertAction(title: NSLocalizedString("Filters", comment : "Title for filters button"), style: UIAlertActionStyle.Default) { (action) -> Void in
       self.collectionViewYConstraint.constant = 30
       self.imageViewBottomConstraint.constant = self.imageView.frame.height * 0.2
-      self.photoButton.hidden = true
+      self.photoButton.titleLabel?.textColor = UIColor.blackColor()
       
       UIView.animateWithDuration(0.4, animations: { () -> Void in
         self.view.layoutIfNeeded()
@@ -125,7 +124,7 @@ class ViewController: UIViewController, imageSelectedProtocol, UICollectionViewD
   
   //MARK: Setup Thumbnails
   func setupThumbnails() {
-    self.filterNames = ["CISepiaTone","CIPhotoEffectChrome", "CIPhotoEffectNoir", "CIDotScreen", "CIHatchedScreen"]
+    self.filterNames = ["CISepiaTone","CIPhotoEffectChrome", "CIPhotoEffectNoir", "CIDotScreen", "CIHatchedScreen", "CIColorInvert", "CIColorMonochrome"]
     for name in self.filterNames {
       let thumbnail = Thumbnail(filterName: name, operationQueue: self.imageQueue, context: self.gpuContext)
       self.thumbnails.append(thumbnail)
@@ -171,6 +170,7 @@ class ViewController: UIViewController, imageSelectedProtocol, UICollectionViewD
   
   func doneButtonPressed() {
     println("done button pressed")
+    self.photoButton.titleLabel?.textColor = UIColor.whiteColor()
     self.collectionViewYConstraint.constant = (-120)
     self.imageViewBottomConstraint.constant = 20
     UIView.animateWithDuration(0.4, animations: { () -> Void in
